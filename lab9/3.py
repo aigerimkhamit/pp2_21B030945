@@ -21,7 +21,8 @@ colors = {
     'white' : (255, 255, 255),
     'purple' : (255, 0, 255),
     'brown' : (150, 75, 0),
-    'olive' : (128, 128, 0)
+    'olive' : (128, 128, 0),
+    'sky blue' : (0, 255, 255)
 }
 
 color = colors['green']
@@ -53,6 +54,8 @@ while not done:
                 color = colors['brown']
             if event.key == pygame.K_u:
                 color = colors['purple']
+            if event.key == pygame.K_a:
+                color = colors['sky blue']
             if event.key == pygame.K_p:
                 figure = 'pen'
             if event.key == pygame.K_c:
