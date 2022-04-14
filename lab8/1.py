@@ -8,7 +8,7 @@ pygame.init()
 
 FPS = 60
 FramePerSec = pygame.time.Clock()
-
+# colors
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -59,10 +59,10 @@ class Player(pygame.sprite.Sprite):
         pressed_keys = pygame.key.get_pressed()
         if self.rect.left > 0:
             if pressed_keys[K_LEFT]:
-                self.rect.move_ip(-5, 0)
+                self.rect.move_ip(-10, 0)
         if self.rect.right < SCREEN_WIDTH:
             if pressed_keys[K_RIGHT]:
-                self.rect.move_ip(5, 0)
+                self.rect.move_ip(10, 0)
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -85,6 +85,7 @@ class Coin(pygame.sprite.Sprite):
     def move(self):
         global score
         self.rect.y += coin_speed
+        # collision with coin
         if pygame.Rect.collidepoint(P1.rect, self.rect.x, self.rect.y):
             score += 1
             self.rect.top = 0
@@ -111,19 +112,13 @@ enemies.add(E1)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
 all_sprites.add(E1)
-coins = pygame.sprite.Group()
-coins.add(F1)
-all_coins = pygame.sprite.Group()
-all_coins.add(P1)
-all_coins.add(F1)
-
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+    # collision with enemy
     if pygame.sprite.spritecollideany(P1, enemies):
           pygame.mixer.Sound('crash.wav').play()
           time.sleep(0.1)
@@ -141,16 +136,11 @@ while True:
     P1.update()
     E1.move()
     F1.move()
-    # for i in coins_list:
-    #     i.move()
+
     screen.fill(WHITE)
     screen.blit(background, (0, 0))
     P1.draw(screen)
     E1.draw(screen)
-
-    for entity in all_sprites:
-        entity.update()
-        screen.blit(entity.image, entity.rect)
     
     F1.draw(screen)
     screen.blit(collected_coins, (245, 0))

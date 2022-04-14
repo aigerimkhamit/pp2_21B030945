@@ -33,7 +33,7 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-        if event.type == pygame.KEYDOWN:
+        if event.type == pygame.KEYDOWN: # for changing
             if event.key == pygame.K_b:
                 color = colors['blue']
             if event.key == pygame.K_g:
@@ -56,7 +56,7 @@ while not done:
         if event.type == pygame.MOUSEBUTTONUP:
             draw_on = False
             base.blit(screen, (0, 0))
-        if event.type == pygame.MOUSEMOTION:
+        if event.type == pygame.MOUSEMOTION: # functions for figures
             if draw_on == True:
                 if figure == 'circle':
                     screen.blit(base, (0, 0))

@@ -9,6 +9,7 @@ pygame.init()
 FPS = 60
 FramePerSec = pygame.time.Clock()
 
+# colors
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -34,6 +35,7 @@ speed = 10
 coin_speed = 5
 score = 0
 score_font = pygame.font.SysFont('Verdana', 14)
+#function for showing score
 def show_score(x, y):
     global score
     s = score_font.render(f'{score}', True, BLACK)
@@ -108,7 +110,7 @@ class Coin(pygame.sprite.Sprite):
     def draw(self, surface):
         surface.blit(self.image, self.rect)
 
-
+#class for second coin
 class Coin1(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -116,10 +118,11 @@ class Coin1(pygame.sprite.Sprite):
         self.rect1 = self.image1.get_rect()
         self.rect1.x = random.randint(50, SCREEN_WIDTH - 50)
         self.rect1.y = 0
-
+    
     def move(self):
         global score
         self.rect1.y += coin_speed 
+        # for collision with coin
         if pygame.Rect.collidepoint(P1.rect, self.rect1.x, self.rect1.y):
             score += 3
             self.rect1.top = 0
@@ -145,26 +148,13 @@ enemies.add(E1)
 all_sprites = pygame.sprite.Group()
 all_sprites.add(P1)
 all_sprites.add(E1)
-# coins = pygame.sprite.Group()
-# coins.add(F1)
-# all_coins = pygame.sprite.Group()
-# all_coins.add(P1)
-# all_coins.add(F1)
-
-# showing score
-score = 0
-score_font = pygame.font.SysFont('Verdana', 14)
-def show_score(x, y):
-    global score
-    s = score_font.render(f'{score}', True, BLACK)
-    screen.blit(s, (x, y))
 
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
-
+    # collision with enemy
     if pygame.sprite.spritecollideany(P1, enemies):
           pygame.mixer.Sound('crash.wav').play()
           time.sleep(0.1)

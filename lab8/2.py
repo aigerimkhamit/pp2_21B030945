@@ -3,6 +3,7 @@ import pygame, time
 
 pygame.init()
 
+# colors
 BLUE = (0, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
@@ -54,7 +55,7 @@ class Snake:
 
         self.elements[0][0] += self.dx
         self.elements[0][1] += self.dy
-
+        # collision with walls
         if self.elements[0][0] > 795 or self.elements[0][0] < 5:
             pygame.mixer.music.load('gameover.mp3')
             pygame.mixer.music.play()
@@ -97,10 +98,12 @@ class Food:
 
 score = 0
 level = 0
+# for level
 def show_level(x, y):
     global level
     s = font1.render(f'{level}', True, BLACK)
     screen.blit(s, (x, y))
+# for score
 def show_score(x, y):
     global score
     s = font1.render(f'{score}', True, BLACK)
